@@ -24,7 +24,7 @@ const { NODE_ENV, PORT = 3000, DB_URL } = process.env;
 mongoose.connect(NODE_ENV === 'production' ? DB_URL : 'mongodb://0.0.0.0:27017/filmsdb');
 
 const app = express();
-// app.use(cors({ origin: ['http://localhost:3001',] }));
+app.use(cors({ origin: ['http://localhost:3001', 'https://http://diplom.yaks.nomoredomainsicu.ru'] }));
 
 app.use(helmet());
 
