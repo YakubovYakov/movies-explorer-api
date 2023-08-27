@@ -1,10 +1,8 @@
-/* eslint-disable no-shadow */
-/* eslint-disable no-unused-vars */
 const Movie = require('../models/movie');
 const BadRequestError = require('../errors/BadRequestError');
 const NotFoundError = require('../errors/NotFoundError');
 const ForbiddenError = require('../errors/ForbiddenError');
-const movie = require('../models/movie');
+// const movie = require('../models/movie');
 
 // Получить все фильмы
 const getMovies = (req, res, next) => {
@@ -84,8 +82,11 @@ const deleteMovie = (req, res, next) => {
         .catch((err) => {
           if (err.name === 'CastError') {
             next(new BadRequestError('Переданы некорректные данные при удалении карточки'));
-          } else next(err);
-        });
+          } else {
+            next(err);
+          }
+        })
+        .catch(next);
     });
 };
 
