@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const validator = require('validator');
+const mongoose = require("mongoose");
+const validator = require("validator");
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -31,7 +31,7 @@ const movieSchema = new mongoose.Schema({
       },
     },
   },
-  trailer: {
+  trailerLink: {
     type: String,
     required: true,
     validate: {
@@ -51,7 +51,7 @@ const movieSchema = new mongoose.Schema({
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'user',
+    ref: "user",
     required: true,
   },
   movieId: {
@@ -68,4 +68,4 @@ const movieSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('movie', movieSchema);
+module.exports = mongoose.model("movie", movieSchema);

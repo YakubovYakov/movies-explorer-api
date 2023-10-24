@@ -1,27 +1,30 @@
-const express = require('express');
-const helmet = require('helmet');
-const dotenv = require('dotenv');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const { errors } = require('celebrate');
-// const cors = require('cors');
-const routes = require('./routes');
-const errorsHandler = require('./middlewares/errorHandler');
+const express = require("express");
+const helmet = require("helmet");
+const dotenv = require("dotenv");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const { errors } = require("celebrate");
+const cors = require("cors");
+const routes = require("./routes");
+const errorsHandler = require("./middlewares/errorHandler");
 const limiter = require('./middlewares/rateLimiter');
-const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { requestLogger, errorLogger } = require("./middlewares/logger");
 
 dotenv.config();
 
-const {
-  NODE_ENV,
-  PORT = 3000,
-  DB_URL,
-} = process.env;
+const { NODE_ENV, PORT = 3000, DB_URL } = process.env;
 
-mongoose.connect(NODE_ENV === 'production' ? DB_URL : 'mongodb://127.0.0.1:27017/filmsdb');
+mongoose.connect(DB_URL || "mongodb://127.0.0.1:27017/bitfilmsdb");
 
 const app = express();
-// app.use(cors({ origin: ['http://localhost:3001', 'https://http://diplom.yaks.nomoredomainsicu.ru'] }));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3001",
+      "https://diplom.yaks.nomoredomainsicu.ru",
+    ],
+  })
+);
 
 app.use(helmet());
 

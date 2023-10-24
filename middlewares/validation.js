@@ -1,12 +1,11 @@
 /* eslint-disable no-useless-escape */
-const { celebrate, Joi } = require('celebrate');
+const { celebrate, Joi } = require("celebrate");
 
-const regex = /^(http|https):\/\/(?:www\.)?[a-zA-Z0-9._~\-:?#[\]@!$&'()*+,\/;=]{2,256}\.[a-zA-Z0-9.\/?#-]{2,}$/;
+const regex = /^https?:\/\/(www\.)?[a-zA-Z0-9-._~:/?#@!$&'()*+,;=%]*/;
 
 const validateMovieId = celebrate({
   params: Joi.object().keys({
-    movieId: Joi.string().required().alphanum().length(24)
-      .hex(),
+    movieId: Joi.string().hex().length(24).required(),
   }),
 });
 
@@ -36,11 +35,11 @@ const validateMovie = celebrate({
   body: Joi.object().keys({
     country: Joi.string().required(),
     director: Joi.string().required(),
-    duration: Joi.string().required(),
+    duration: Joi.number().required(),
     year: Joi.number().required(),
     description: Joi.string().required(),
     image: Joi.string().required().pattern(regex),
-    trailer: Joi.string().required().pattern(regex),
+    trailerLink: Joi.string().required().pattern(regex),
     thumbnail: Joi.string().required().pattern(regex),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
