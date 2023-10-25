@@ -22,6 +22,7 @@ app.use(
     origin: [
       "http://localhost:3001",
       "https://diplom.yaks.nomoredomainsicu.ru",
+			"https://diplom.yaks.nomoredomainsicu.ru"
     ],
   })
 );
